@@ -1,10 +1,14 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render
+from .models import Tutorial
 
 def home(request):
-    return HttpResponse('bismisslahir rahmanir harim')
+    context = {
+        'tutorials':Tutorial.objects.all()
+    }
+    return render(request, "home.html", context)
 
 def about(request):
-    return HttpResponse('about: bismisslahir rahmanir harim')
+    return render(request, "about.html")
 
 def contact(request):
-    return HttpResponse('contact: bismisslahir rahmanir harim')
+    return render(request, "contact.html")

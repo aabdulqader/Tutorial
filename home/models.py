@@ -7,8 +7,7 @@ class Tutorial(models.Model):
 
 
     def __str__(self):
-        return self.title[:35] + ' | ' + self.content[:30]
-
+        return self.title
     
     
 
