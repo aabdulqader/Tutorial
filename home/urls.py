@@ -4,6 +4,9 @@ from .views import (
     about, 
     contact, 
     register,
+    logout_view,
+    login_view,
+    
 
 
 )
@@ -19,6 +22,7 @@ urlpatterns = [
     path('about/', about, name='about' ),
     path('contact/', contact, name='contact' ),
     path('register/', register, name='register' ),
-    
+    path('logout/', logout_view, name='logout' ),
+    path('login/', login_view, name='login' ),
 
 ]

@@ -26,11 +26,11 @@
         
         
         {% if user.is_authenticated %}
-          <li><a href="" class="waves-effect waves-light btn-small">{{user.username}}</a></li>
-          <li><a href="" class="waves-effect waves-light btn-small">logout</a></li>
+          <li><a class="waves-effect waves-light btn-small">{{user.username}}</a></li>
+          <li><a href="{% url 'home:logout' %}" class="waves-effect waves-light btn-small">logout</a></li>
         {% else %}
           <li><a href="{% url 'home:register' %}" class="waves-effect waves-light btn-small">Register</a></li>
-          <li><a href="" class="waves-effect waves-light btn-small">Login</a></li>
+          <li><a href="{% url 'home:login' %}" class="waves-effect waves-light btn-small">Login</a></li>
         {% endif %}
       </ul>
     </div>

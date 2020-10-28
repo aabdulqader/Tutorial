@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}Login{% endblock title %}
+{% block body %}
+
+    <div class="container">
+        <h1>Login Your Account</h1>
+        <form action="" method="POST">
+            {% csrf_token %}
+            {{form.as_p}}
+            <button class="btn waves-effect waves-light" type="submit" name="action">
+                Login
+            </button>
+        </form>
+        Create An Account? <a href="{% url 'home:register' %}"><strong>Register</strong></a>
+    </div>
+
+    
+{% endblock body %}
