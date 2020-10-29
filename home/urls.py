@@ -6,6 +6,7 @@ from .views import (
     register,
     logout_view,
     login_view,
+    single_slug,
     
 
 
@@ -24,5 +25,6 @@ urlpatterns = [
     path('register/', register, name='register' ),
     path('logout/', logout_view, name='logout' ),
     path('login/', login_view, name='login' ),
+    path("<single_slug>", single_slug, name="single_slug"),
 
 ]

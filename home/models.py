@@ -40,7 +40,7 @@ class Tutorial(models.Model):
     published = models.DateTimeField(auto_now_add=True)
 
     tutorial_series = models.ForeignKey(TutorialSeries, default=1, verbose_name="Series", on_delete=models.SET_DEFAULT)
-    tutorial_slug = models.CharField(max_length=200, default=1)
+    tutorial_slug = models.SlugField(max_length=200, unique=True)
 
 
     def __str__(self):

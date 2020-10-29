@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
-from .models import Tutorial
+from django.http import HttpResponse
+from .models import Tutorial, TutorialCategory, TutorialSeries
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
@@ -8,18 +9,46 @@ from .forms import NewUserFrom
 
 
 
+def single_slug(request, single_slug):
+
+    categories = [c.category_slug for c in TutorialCategory.objects.all()]
+    if single_slug in categories:
+        matching_series = TutorialSeries.objects.filter(tutorial_category__category_slug=single_slug)
+        
+        series_urls = {}
+        for m in matching_series.all():
+            part_one = Tutorial.objects.filter(tutorial_series__tutorial_series=m.tutorial_series).earliest("published")
+            series_urls[m] = part_one.tutorial_slug
+
+            context={
+                "tutorial_series": matching_series, "part_ones": series_urls
+            }
+
+        return render(request, 'serieses.html',context)
+
+    tutorials = [t.tutorial_slug for t in Tutorial.objects.all()]
+    if single_slug in tutorials:
+      return HttpResponse(f"{single_slug} is a Tutorial")
+
+    return HttpResponse(f"'{single_slug}' does not correspond to anything we know of!")
+
+
+
 
 def home(request):
     context = {
-        'tutorials':Tutorial.objects.all()
+        'categories':TutorialCategory.objects.all()
     }
-    return render(request, "home.html", context)
+    return render(request, "categories.html", context)
+
 
 def about(request):
     return render(request, "about.html")
 
+
 def contact(request):
     return render(request, "contact.html")
+
 
 def register(request):
     form = NewUserFrom
